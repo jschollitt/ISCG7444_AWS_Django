@@ -28,7 +28,8 @@ SECRET_KEY = "Something else (meta)"
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '.amazonaws.com'
+    '.amazonaws.com',
+    '127.0.0.1',
 ]
 
 
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hello",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -117,7 +119,17 @@ USE_TZ = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = "/static/"
+
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = ''
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_PRIVATE_MEDIA_LOCATION = 'media/private'
+AWS_PRIVATE_FILE_STORAGE = 'gettingstarted.storage_backends.PrivateMediaStorage'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 #django_heroku.settings(locals())

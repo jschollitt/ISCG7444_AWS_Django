@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+import uuid
+
+from gettingstarted.storage_backends import PrivateMediaStorage
 
 
 # Create your models here.
@@ -31,3 +34,10 @@ class TodoList(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class StoreFile(models.Model):
+    #uuid = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False, )
+    created_at = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=120)
+    file = models.FileField(storage=PrivateMediaStorage())

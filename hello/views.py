@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+
 from .models import Greeting, TodoList, Category
 
 
@@ -42,3 +42,4 @@ def list(request):
                 todo.delete()
 
     return render(request, "list.html", {"todos": todos, "categories":categories})
+
